@@ -9,7 +9,7 @@ var fs = require('fs')
 function standalone(name, entry, exportName) {
   return browserify(entry, { debug: true, standalone: exportName || name })
     .bundle()
-    .pipe(fs.createWriteStream('./dist/'+ name.replace(/_/g, '-') +'.js'))
+    .pipe(fs.createWriteStream('../react-virtual-dom/src/snabb/dist/'+ name.replace(/_/g, '-') +'.js'))
 }
 
 gulp.task('bundle:snabbdom', function() {

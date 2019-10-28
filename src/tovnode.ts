@@ -1,7 +1,9 @@
 import vnode, {VNode} from './vnode';
 import htmlDomApi, {DOMAPI} from './htmldomapi';
+import * as ipRegex from 'ip-regex';
 
-export function toVNode(node: Node, domApi?: DOMAPI): VNode {
+// extend toVNode functon with extra parameter, if ip is true => scan for ip addresses 
+export function toVNode(node: Node, domApi?: DOMAPI, ipFilter = false): VNode {
   const api: DOMAPI = domApi !== undefined ? domApi : htmlDomApi;
   let text: string;
   if (api.isElement(node)) {
@@ -22,11 +24,15 @@ export function toVNode(node: Node, domApi?: DOMAPI): VNode {
       }
     }
     for (i = 0, n = elmChildren.length; i < n; i++) {
-      children.push(toVNode(elmChildren[i], domApi));
+      children.push(toVNode(elmChildren[i], domApi, ipFilter));
     }
     return vnode(sel, {attrs}, children, undefined, node);
   } else if (api.isText(node)) {
     text = api.getTextContent(node) as string;
+    //check if ip scan is needed 
+    if ( ipFilter && ipRegex().test(text)) {
+      text = '***.***.***.***';
+    }
     return vnode(undefined, undefined, undefined, text, node);
   } else if (api.isComment(node)) {
     text = api.getTextContent(node) as string;

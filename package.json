@@ -62,5 +62,8 @@
     "hooks": {
       "pre-commit": "npm test"
     }
+  },
+  "dependencies": {
+    "ip-regex": "^4.1.0"
   }
 }
