@@ -1,0 +1,1 @@
+{"version":3,"file":"injectIP.js","sourceRoot":"","sources":["src/injectIP.ts"],"names":[],"mappings":";;AAAA,iCAAqC;AAExB,QAAA,QAAQ,GAAG,UAAC,IAAY,EAAE,IAAU;IAC/C,OAAO,eAAK,CAAC,SAAS,EAAE,SAAS,EAAE,SAAS,EAAE,iBAAiB,EAAE,IAAW,CAAC,CAAC;AAChF,CAAC,CAAC"}

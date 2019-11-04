@@ -1,6 +1,7 @@
 import vnode, {VNode} from './vnode';
 import htmlDomApi, {DOMAPI} from './htmldomapi';
 import * as ipRegex from 'ip-regex';
+import {injectIP} from './injectIP';
 
 // extend toVNode functon with extra parameter, if ip is true => scan for ip addresses 
 export function toVNode(node: Node, domApi?: DOMAPI, ipFilter = false): VNode {
@@ -31,7 +32,7 @@ export function toVNode(node: Node, domApi?: DOMAPI, ipFilter = false): VNode {
     text = api.getTextContent(node) as string;
     //check if ip scan is needed 
     if ( ipFilter && ipRegex().test(text)) {
-      text = '***.***.***.***';
+      return injectIP(text, node);
     }
     return vnode(undefined, undefined, undefined, text, node);
   } else if (api.isComment(node)) {
